@@ -9,21 +9,29 @@
 
 ## Key Vocab
 
-- **Virtual Environment**: A virtual environment is a directory tree which
- contains Python executable files and other files which
- indicate that it is a virtual environment.
-
-- **Dependency**: A software dependency is a code library or package that
- is reused in a new piece of software.
+- **Module**: a file containing Python definitions and statements. A module's
+functions, classes, and global variables can be accessed by other modules.
+- **Package**: a collection of modules that can be accessed as a group using
+the package name.
+- **`import`**: the Python keyword used to access data from other packages and
+modules inside of the current module.
+- **PyPI**: the **Py**thon **P**ackage **I**ndex. A repository of Python
+packages that can be downloaded and made available to your application.
+- **`pip`**: the command line tool used to download packages from PyPI. `pip`
+is installed on your computer automatically when you download Python.
+- **Virtual Environment**: a collection of modules, packages, and scripts that
+can be activated or deactivated at any time.
+- **Pipenv**: a virtual environment tool that uses `pip` to manage the modules,
+packages, and scripts that you intend to use in your application.
 
 ***
 
 ## Introduction
 
 In this lesson we will talk about environment tools like pyenv and pipenv.
- These tools allows us to separate different python environments for all
+ These tools allows us to separate different Python environments for all
  kinds of use cases. This is useful when we need an isolated environment
- with libraries and specific versions of python.
+ with libraries and specific versions of Python.
 
 ## Pyenv
 
@@ -38,7 +46,7 @@ $ pyenv versions
 * system (set by /Users/username/.pyenv/version)
 ```
 
-We can see the different versions of python available to install
+We can see the different versions of Python available to install
 using the following command
 
 ```bash
@@ -51,7 +59,7 @@ Available versions:
   ...
 ```
 
-Lets install a new version of python (3.9.2). We can do this using the
+Lets install a new version of Python (3.9.2). We can do this using the
  following command
 
 ```bash
@@ -59,17 +67,17 @@ pyenv install 3.9.2
 
 ```
 
-To set the global python version to the one we have installed
+To set the global Python version to the one we have installed
 
 ```bash
 pyenv global 3.9.2
 ```
 
-Now we can run python code with the version of python we want to use.
+Now we can run Python code with the version of Python we want to use.
 
 ## Pipenv
 
-Pyenv allows us to manage the version of python we are working with.
+Pyenv allows us to manage the version of Python we are working with.
 
 What if we want to manage dependencies as well?
 
@@ -81,15 +89,15 @@ To install pipenv follow the instructions here [pipenv install](https://pipenv.p
 To create a virtual environment using pipenv we can use the following command.
 
 ```bash
-pipenv install -python 3.8
+pipenv --python 3.8
 ```
 
-In the python flag we can define which version of `--python` we want to use.
+In the Python flag we can define which version of `--python` we want to use.
 
 You will notice a `Pipfile` and a `Pipfile.lock` have been added
 to the directory.
 
-The `Pipfile` describes the dependencies we have installed and the python version.
+The `Pipfile` describes the dependencies we have installed and the Python version.
 
 The `Pipfile.lock` describes all the dependencies our dependencies rely on.
 The lock file gives us the ability to produce a deterministic and reproducible
@@ -131,17 +139,17 @@ they help us develop and test the code.
 
 How do we get into our virtual environment?
 
-Using the following command will allow us to use the virtual environment
+Using the following command we can use the virtual environment
 and run commands inside of it.
 
 ```bash
 pipenv shell
 ```
 
-Now we are in the virtual environment and have access to the dependencies we 
-defined in the Pipfile. If we run the following commands in the virtual environment
-we will see that we can
-import the `requests` module we installed earlier.
+Now we are in the virtual environment and have access to the dependencies we
+defined in the Pipfile. If we run the following commands in the virtual
+ environment we will see that we can
+import the `requests` module we installed using `pipenv install requests`.
 
 ```bash
 python
@@ -149,11 +157,9 @@ python
 >>>
 ```
 
-We can see that we have access to the requests module in the python repl.
-
 Now we can write all our code in this directory and run it in the deterministic
 virtual environment.
-If we have a python file called `program.py` we can use the following command to
+If we have a Python file called `program.py` we can use the following command to
 run it in the virtual environment.
 
 ```bash
@@ -163,7 +169,7 @@ pipenv run python program.py
 ## Conclusion
 
 Virtual environments allow us to have a deterministic and predictable runtime
-for our python projects. We can define specific versions for python and the 
+for our Python projects. We can define specific versions for Python and the
 dependencies we need. We can easily add new virtual environments for multiple
 projects we have on our machine.
 ***
@@ -171,5 +177,5 @@ projects we have on our machine.
 ## Resources
 
 - [Python 3 Documentation](https://docs.python.org/3/)
-- [pyenv](https://github.com/pyenv/pyenv/)
-- [pipenv](https://pipenv.pypa.io/en/latest/)
+- [Pyenv](https://github.com/pyenv/pyenv/)
+- [Pipenv](https://pipenv.pypa.io/en/latest/)
