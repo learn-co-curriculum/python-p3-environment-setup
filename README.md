@@ -2,7 +2,7 @@
 
 ## Learning Goals
 
-- Use pyenv to use different python versions
+- Use pyenv to use different Python versions
 - Set up virtual environment using pipenv
 
 ***
