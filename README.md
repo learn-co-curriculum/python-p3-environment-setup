@@ -33,6 +33,8 @@ In this lesson we will talk about environment tools like pyenv and pipenv.
  kinds of use cases. This is useful when we need an isolated environment
  with libraries and specific versions of Python.
 
+***
+
 ## Pyenv
 
 Use the following instructions to install pyenv for your operating system.
@@ -75,6 +77,8 @@ pyenv global 3.9.2
 
 Now we can run Python code with the version of Python we want to use.
 
+***
+
 ## Pipenv
 
 Pyenv allows us to manage the version of Python we are working with.
@@ -89,7 +93,7 @@ To install pipenv follow the instructions here [pipenv install](https://pipenv.p
 To create a virtual environment using pipenv we can use the following command.
 
 ```bash
-pipenv --python 3.8
+pipenv --python 3.8.13
 ```
 
 In the Python flag we can define which version of `--python` we want to use.
@@ -166,12 +170,15 @@ run it in the virtual environment.
 pipenv run python program.py
 ```
 
+***
+
 ## Conclusion
 
 Virtual environments allow us to have a deterministic and predictable runtime
 for our Python projects. We can define specific versions for Python and the
 dependencies we need. We can easily add new virtual environments for multiple
 projects we have on our machine.
+
 ***
 
 ## Resources
