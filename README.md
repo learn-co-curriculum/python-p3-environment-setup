@@ -161,6 +161,10 @@ python
 >>>
 ```
 
+If you ever need to remove a virtual environment you can use the `pipenv --rm` command.
+This command can help you debug any conflicting environment issues. After running
+the remove command you can run `pipenv install` again to create a new virtual environment.
+
 Now we can write all our code in this directory and run it in the deterministic
 virtual environment.
 If we have a Python file called `program.py` we can use the following command to
