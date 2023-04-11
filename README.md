@@ -88,7 +88,7 @@ What if we want to manage dependencies as well?
 Pipenv  automatically creates and manages a virtualenv for your projects,
  it also adds/removes packages from your Pipfile as you install/uninstall packages
 
-To install pipenv follow the instructions here [pipenv install](https://pipenv.pypa.io/en/latest/install/)
+To install pipenv follow the instructions here [pipenv install](https://pipenv.pypa.io/en/latest/installation/)
 
 To create a virtual environment using pipenv we can use the following command.
 
