@@ -51,6 +51,30 @@ $ pyenv versions
   ...
 ```
 
+Confirm your current global Python version is 3.8.13:
+
+```console
+$ python3 --version
+Python 3.8.13
+```
+
+Take a look at the file `program.py`, which simply prints the current Python
+version:
+
+```py
+import sys
+print("Python version")
+print(sys.version)
+```
+
+You can also run this program to confirm your Python version is 3.8.13:
+
+```console
+$ python program.py
+Python version
+3.8.13
+```
+
 We can see the different versions of Python available to install using the
 following command
 
@@ -71,7 +95,15 @@ command
 $ pyenv install 3.11
 ```
 
-To set the global Python version to the new version 3.11:
+Installing a new version of Python does not however change the current global
+version. We can confirm this by checking the Python version:
+
+```console
+$ python3 --version
+Python 3.8.13
+```
+
+Use `pyenv` to set the global Python version to the new version 3.11:
 
 ```console
 $ pyenv global 3.11
@@ -84,7 +116,14 @@ $ python3 --version
 Python 3.11.4
 ```
 
-Now we can run Python code with version 3.11.x.
+Now if we run a Python program, we'll see it is executed using Python version
+3.11.x. For example, let's run `program.py`:
+
+```console
+$ python program.py
+Python version
+3.11.4
+```
 
 Let's set the global Python version back to 3.8.13:
 
@@ -99,6 +138,14 @@ $ python3 --version
 Python 3.8.13
 ```
 
+Confirm our Python program `program.py` runs in this version:
+
+```console
+$ python program.py
+Python version
+3.8.13
+```
+
 ---
 
 ## Pipenv
@@ -108,12 +155,14 @@ Pyenv allows us to manage the version of Python we are working with.
 What if we want to manage dependencies as well?
 
 Pipenv automatically creates and manages a virtualenv for your projects, it also
-adds/removes packages from your Pipfile as you install/uninstall packages
+adds/removes packages from your Pipfile as you install/uninstall packages.
+Pipenv also let's you run programs with a particular version of Python.
 
 To install pipenv follow the instructions here
 [pipenv install](https://pipenv.pypa.io/en/latest/installation/)
 
-To create a virtual environment using pipenv we can use the following command.
+We can use pipenv to create a virtual environment to run Python programs with
+version 3.11:
 
 ```bash
 pipenv --python 3.11
@@ -183,24 +232,52 @@ Pytest will be added to the Pipfile as a dev dependency
 Dev dependencies are modules which are not needed in production but they help us
 develop and test the code.
 
-How do we get into our virtual environment?
+The command `pipenv --version 3.11` created the `Pipfile` and `Pipfile.lock`
+files that define a virtual environment. However, the environment is not yet
+activated, and the current shell is still running Python 3.8.13. We can confirm
+this by:
 
-Using the following command we can use the virtual environment and run commands
-inside of it.
+```console
+$ python3 --version
+Python 3.8.13
+```
+
+We can also run `program.py` to print the current Python version:
+
+```console
+$ python program.py
+Python version
+3.8.13
+```
+
+How do we get into our virtual environment to run programs with version 3.11 and
+the various imported modules?
+
+Use the following command to activate the virtual environment and run commands
+inside of it:
 
 ```bash
 pipenv shell
 ```
 
-Now we are in the virtual environment and have access to the dependencies we
-defined in the Pipfile. If we run the following commands in the virtual
-environment we will see that we can import the `requests` module we installed
-previously using `pipenv install requests`.
+Now we are in the virtual environment running Python 3.11, and have access to
+the dependencies we defined in the Pipfile. If we run the following commands in
+the virtual environment we will see that we can import the `requests` module we
+installed previously using `pipenv install requests`.
 
 ```console
 $ python
 >>> import requests
 >>> exit()
+```
+
+If we run our Python program `program.py` in the virtual environment, we should
+see we are running 3.11.x:
+
+```console
+$ python program.py
+Python version
+3.11.4
 ```
 
 If you ever need to remove a virtual environment you can use the `pipenv --rm`
@@ -211,33 +288,79 @@ $ pipenv --rm
 Removing virtualenv (/Users/username/python-p3-environment-setup/.venv)...
 ```
 
-This command can help you debug any conflicting environment issues. After
-running the remove command you can run `pipenv install` again to create a new
-virtual environment.
-
-Now we can write all our code in this directory and run it in the deterministic
-virtual environment. If we have a Python file called `program.py` we can use the
-following command to run it in the virtual environment.
-
-```console
-$ pipenv run python program.py
-```
-
----
-
-Let's confirm you are no longer in a virtual environment and that your Python
-version is 3.8.13:
-
-```console
-$ pipenv --rm
-Removing virtualenv (/Users/username/python-p3-environment-setup/.venv)...
-```
+This should return us back to our global Python version of 3.8.13, which we can
+confirm in a few different ways:
 
 ```console
 $ python3 --version
+Python 3.8.13
 ```
 
+```console
+$ python program.py
+Python version
+3.8.13
+```
+
+If you type `pipenv shell` (but don't!), you are activating the virtual
+environment in a new shell and every command you type is executed within that
+environment. Sometimes you might want to run a single command in a virtual
+environment. We can do with by running `pipenv install` then
+`pipenv run <command>` to execute a particular command within the virtual
+environment.
+
+Run `pipenv install` again, but **don't** activate the environment in a new
+shell. You'll see the global version of Python for the current shell is still
+3.8.13:
+
+```console
+$ pipenv install
+$ python program.py
+Python version
+3.8.13
+```
+
+We can run `program.py` in the virtual environment defined in `Pipfile` (i.e.
+Python 3.11 and installed modules) as shown:
+
+```console
+$ pipenv run python program.py
+Python version
+3.11.4
+```
+
+Since we did not activate the virtual environment in a new shell, the
+environment is no longer active after the program completes, and the current
+shell is still using 3.8.13:
+
+```console
+$ python program.py
+Python version
+3.8.13
+```
+
+Since we've set the python version for this program to 3.11, the program will
+run using python 3.11, even though the global version is 3.8.13. As long as we
+have a specific python version installed on our computer, we can use it locally
+in specific programs without having to reset our global python version.
+
+---
+
 ## Conclusion
+
+Confirm you are no longer in a virtual environment (you might see an error
+message if you already removed the virtual environment).
+
+```console
+$ pipenv --rm
+```
+
+Confirm you are back using global Python version 3.8.13:
+
+```console
+$ python3 --version
+Python 3.8.13
+```
 
 Virtual environments allow us to have a deterministic and predictable runtime
 for our Python projects. We can define specific versions for Python and the
