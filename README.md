@@ -1,4 +1,4 @@
-# Environment Setup
+# Environment Setup (Code-Along)
 
 ## Learning Goals
 
@@ -32,6 +32,9 @@ In this lesson we will talk about environment tools like pyenv and pipenv. These
 tools allows us to separate different Python environments for all kinds of use
 cases. This is useful when we need an isolated environment with libraries and
 specific versions of Python.
+
+You should execute the commands shown in this lesson to get practice working
+with pyenv and pipenv.
 
 ---
 
